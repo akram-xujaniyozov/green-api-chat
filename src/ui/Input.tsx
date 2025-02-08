@@ -1,27 +1,42 @@
 import React, { ReactNode } from "react";
 import { TextField } from "@radix-ui/themes";
 
-type InputProps = {
-  placeholder: string;
-  icon?: ReactNode;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
+type InputProps = TextField.RootProps &
+  TextField.SlotProps & {
+    icon?: ReactNode;
+    onClick?: () => void;
+  };
 
 export const Input: React.FC<InputProps> = ({
+  value,
   placeholder,
-  onChange,
+  type,
   icon,
+  radius,
+  onChange,
+  size,
+  onClick,
+  side = "left",
 }) => {
   return (
     <TextField.Root
+      value={value}
       onChange={onChange}
       placeholder={placeholder}
-      radius="large"
+      type={type}
+      radius={radius}
       variant="surface"
       color="green"
-      size="1"
+      size={size}
+      className="text-gray-500"
     >
-      <TextField.Slot side="left" px="2" color="green">
+      <TextField.Slot
+        side={side}
+        px="2"
+        color="green"
+        onClick={onClick}
+        className="hover:cursor-pointer"
+      >
         {icon}
       </TextField.Slot>
     </TextField.Root>

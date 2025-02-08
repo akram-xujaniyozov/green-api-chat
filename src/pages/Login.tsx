@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex } from "@radix-ui/themes";
 
-import { LoginForm } from "../components/LoginForm";
+import { LoginForm } from "../components";
 
 export const Login: React.FC = () => {
   return (

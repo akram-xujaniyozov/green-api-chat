@@ -2,7 +2,13 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router } from "react-router";
 
-import { ThemeProvider, AuthProvider } from "./context";
+import {
+  ThemeProvider,
+  AuthProvider,
+  ContactProvider,
+  QueryProvider,
+  MessagesProvider,
+} from "./context";
 
 import App from "./App.tsx";
 
@@ -12,11 +18,17 @@ import "./index.css";
 createRoot(document.getElementById("root") as HTMLDivElement).render(
   <StrictMode>
     <AuthProvider>
-      <ThemeProvider>
-        <Router>
-          <App />
-        </Router>
-      </ThemeProvider>
+      <QueryProvider>
+        <ContactProvider>
+          <MessagesProvider>
+            <ThemeProvider>
+              <Router>
+                <App />
+              </Router>
+            </ThemeProvider>
+          </MessagesProvider>
+        </ContactProvider>
+      </QueryProvider>
     </AuthProvider>
   </StrictMode>
 );

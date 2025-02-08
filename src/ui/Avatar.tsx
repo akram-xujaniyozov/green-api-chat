@@ -1,6 +1,6 @@
 import React from "react";
-import { Avatar } from "@radix-ui/themes";
+import { Avatar, AvatarProps } from "@radix-ui/themes";
 
-export const UserAvatar: React.FC = () => {
-  return <Avatar fallback="A" />;
+export const CustomAvatar: React.FC<AvatarProps> = ({ fallback }) => {
+  return <Avatar color="green" size="3" radius="medium" fallback={fallback} />;
 };
