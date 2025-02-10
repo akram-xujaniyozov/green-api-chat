@@ -1,13 +1,12 @@
-import { getDataStorage } from "../utils/dataStorage";
+const baseURL = "https://7105.api.greenapi.com";
 
-export const baseURL = "https://7105.api.greenapi.com";
-
-const idInstance = getDataStorage("id");
-const apiTokenInstance = getDataStorage("token");
-
-export const urls = {
-  getMessages: `/waInstance${idInstance}/receiveNotification/${apiTokenInstance}`,
-  sendMessage: `/waInstance${idInstance}/sendMessage/${apiTokenInstance}`,
-  deleteMessage: (id: number) =>
+const urls = {
+  getMessages: (idInstance: string, apiTokenInstance: string) =>
+    `/waInstance${idInstance}/receiveNotification/${apiTokenInstance}`,
+  sendMessage: (idInstance: string, apiTokenInstance: string) =>
+    `/waInstance${idInstance}/sendMessage/${apiTokenInstance}`,
+  deleteMessage: (id: number, idInstance: string, apiTokenInstance: string) =>
     `/waInstance${idInstance}/deleteNotification/${apiTokenInstance}/${id}`,
 };
+
+export { baseURL, urls };

@@ -18,10 +18,13 @@ const useGetMessages = <T extends RecieveMessageType>(
   const getMessages = async (): Promise<T> => {
     const data: T = await Api.get(url);
 
-    await Api.delete(urls.deleteMessage(data.receiptId));
+    await Api.delete(
+      urls.deleteMessage(data.receiptId, idInstance, apiTokensInstance)
+    );
 
     return data;
   };
+
   return useQuery({
     queryKey: [key],
     queryFn: getMessages,

@@ -10,12 +10,12 @@ export const Message: React.FC<MessageProps> = ({ text, sender }) => {
   return (
     <Box as="div" className={sender === "me" ? "text-right" : "text-left"}>
       <Text
-        as="span"
-        className={
+        as="div"
+        className={`inline-block mb-3 text-sm px-2 py-1 rounded-md max-w-80 ${
           sender === "me"
-            ? "inline-block text-sm text-white bg-lightGreen px-2 py-1 rounded-md"
-            : "inline-block text-sm text-black bg-lightGray px-2 py-1 rounded-md"
-        }
+            ? "text-white bg-lightGreen text-right"
+            : "text-black bg-lightGray text-left"
+        }`}
       >
         {text}
       </Text>

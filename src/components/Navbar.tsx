@@ -1,10 +1,22 @@
 import React from "react";
-import { Box, Flex, Text } from "@radix-ui/themes";
+import { useNavigate } from "react-router";
+import { Box, Flex, Text, Button } from "@radix-ui/themes";
+import { useContactContext, useAuthContext } from "../context";
+import { clearStorage } from "../utils/dataStorage";
+
 import { CustomAvatar } from "../ui";
-import { useContactContext } from "../context";
 
 export const Navbar: React.FC = () => {
+  const navigate = useNavigate();
   const { contacts } = useContactContext();
+  const { logout } = useAuthContext();
+
+  const handleLogoutClick = () => {
+    logout();
+    navigate("/login");
+    clearStorage();
+  };
+
   return (
     <Flex as="div" p="3" align="center" gap="3" className="border-b-[1px]">
       <CustomAvatar fallback="D" />
@@ -22,6 +34,9 @@ export const Navbar: React.FC = () => {
           </Text>
         </Flex>
       </Flex>
+      <Button ml="auto" onClick={handleLogoutClick}>
+        Logout
+      </Button>
     </Flex>
   );
 };

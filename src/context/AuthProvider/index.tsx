@@ -6,10 +6,10 @@ import { getDataStorage } from "../../utils/dataStorage";
 export const AuthContext = createContext({} as AuthContextType);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const isAuth = getDataStorage("isAuth");
+  const isAuth = getDataStorage("authenticate");
 
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
-    isAuth === "" ? true : false
+    isAuth !== "" ? true : false
   );
   const login = () => setIsAuthenticated(true);
   const logout = () => setIsAuthenticated(false);

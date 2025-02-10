@@ -1,24 +1,16 @@
 import React from "react";
-import { useNavigate, Navigate } from "react-router";
+import { Navigate } from "react-router";
 import { Box, Flex, Text } from "@radix-ui/themes";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 import { useAuthContext, useContactContext } from "../context";
-import { clearStorage } from "../utils/dataStorage";
 
 import { ContactAdd, ContactList, Navbar, Messages } from "../components";
 import { Input } from "../ui";
 
 export const Chat: React.FC = () => {
-  const { logout, isAuthenticated } = useAuthContext();
+  const { isAuthenticated } = useAuthContext();
   const { contacts } = useContactContext();
-  const navigate = useNavigate();
-
-  const handleLogoutClick = () => {
-    logout();
-    navigate("/login");
-    clearStorage();
-  };
 
   if (!isAuthenticated) {
     return <Navigate to="/login" />;

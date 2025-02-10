@@ -22,7 +22,7 @@ export const LoginForm: React.FC = () => {
     navigate("/chat");
     setDataStorage("id", userId);
     setDataStorage("token", userToken);
-    setDataStorage("isAuth", true);
+    setDataStorage("authenticate", "isAuth");
   };
 
   if (isAuthenticated) {

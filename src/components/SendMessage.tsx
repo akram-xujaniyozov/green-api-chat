@@ -4,19 +4,22 @@ import { PaperPlaneIcon } from "@radix-ui/react-icons";
 import { useSendMessage } from "../api";
 import { SendMessagePayloadType, SendMessageResponseType } from "../types";
 import { useContactContext, useMessagesContext } from "../context";
+import { getDataStorage } from "../utils/dataStorage";
 
 import { urls } from "../constants/url";
 
 import { Input } from "../ui";
 
 export const SendMessage: React.FC = () => {
+  const idInstance = getDataStorage("id");
+  const apiTokensInstance = getDataStorage("token");
   const [message, setMessage] = useState<string>("");
   const { contacts } = useContactContext();
   const { setNewMessages } = useMessagesContext();
   const { mutate } = useSendMessage<
     SendMessageResponseType,
     SendMessagePayloadType
-  >(urls.sendMessage);
+  >(urls.sendMessage(idInstance, apiTokensInstance));
 
   const handleClick = () => {
     if (!message.trim()) return;
@@ -27,7 +30,7 @@ export const SendMessage: React.FC = () => {
           console.log("Sended message!!!");
         },
         onError: (error) => {
-          console.error(error);
+          console.error(error.message);
         },
       }
     );
